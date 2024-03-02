@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMP804 Assignment 1</title>
+    <script>
+	//Task 4: Javascript with button //	
+        function handleButtonClick(buttonId) {
+            // Remove "clicked" class from all buttons
+            document.getElementById('wombatButton').classList.remove('clicked');
+            document.getElementById('echidnaButton').classList.remove('clicked');
+            document.getElementById('pelicanButton').classList.remove('clicked');
+        
+            // Add "clicked" class to the clicked button
+            document.getElementById(buttonId).classList.add('clicked');
+
+            // Set text based on button clicked
+            var buttonText = buttonId === 'wombatButton' ? 'Wombat' : (buttonId === 'echidnaButton' ? 'Echidna' : 'Pelican');
+            document.getElementById('textBox').value = 'User clicks ' + buttonText;
+            document.getElementById('displayText').innerText = buttonText + ' is clicked';
+
+            // Call showAnimalImage function with appropriate image URL and source
+            switch (buttonId) {
+                case 'wombatButton':
+                    showAnimalImage('file:///C:/Users/clair/OneDrive/Desktop/uni/web security/visual studio content/ClaireLinnane_8457487_A3/wombat.png', 'wombatImageSource', 'https://www.environment.nsw.gov.au/topics/animals-and-plants/native-animals/native-animal-facts/wombats');
+                    break;
+                case 'echidnaButton':
+                    showAnimalImage('file:///C:/Users/clair/OneDrive/Desktop/uni/web security/visual studio content/ClaireLinnane_8457487_A3/echidna.png', 'echidnaImageSource', 'https://www.australiangeographic.com.au/fact-file/fact-file-short-beaked-echidna-tachyglossus-aculeatus/');
+                    break;
+                case 'pelicanButton':
+                    showAnimalImage('file:///C:/Users/clair/OneDrive/Desktop/uni/web security/visual studio content/ClaireLinnane_8457487_A3/pelican.png', 'pelicanImageSource', 'https://www.pexels.com/photo/photo-of-a-black-and-white-australian-pelican-10308568/');
+                    break;
+                default:
+                    // Default action
+                    break;
+            }
+        }
+
+        // Display the animal image
+        function showAnimalImage(imageUrl, sourceId, sourceUrl) {
+            // Hide all source elements
+            var allSourceElements = document.getElementsByClassName('imageSource');
+            for (var i = 0; i < allSourceElements.length; i++) {
+                allSourceElements[i].style.display = 'none';
+            }
+
+            // Get the image element and the specific source element
+            var imageElement = document.getElementById('animalImageSource');
+            var sourceElement = document.getElementById(sourceId);
+            var sourceLink = document.getElementById(sourceId + 'Link');
+            
+            // Set the source of the image and the link
+            imageElement.src = imageUrl;
+            sourceElement.style.display = 'block';
+
+            // sourceElement.innerText = 'Image source: ';
+            sourceLink.href = sourceUrl;
+            sourceLink.innerText = 'Click here for image source';
+            sourceLink.style.display = 'block';
+            
+            // Make the image and specific source visible
+            imageElement.style.display = 'block';
+            imageElement.style.width = '310px'; 
+            imageElement.style.height = '240px'; 
+        }
+    </script>
+
+    <style>
+    /* Task 1: Use CSS to display the following Information */
+        p.taskName {
+            font-size: medium;
+            color: rgb(100, 0, 0);
+            font-weight: bold;
+        }
+        p.taskName span {
+            text-decoration: underline;
+        }
+
+        /* Heading 1: Student number and full name */  
+            .subjectCode {
+                font-size: 50px;
+                font-weight: bold;
+            }
+
+            h1 {
+                font-size: 60px;
+                color: darkblue;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: lightskyblue;
+                padding: 30px;
+                text-align: center;
+                border-style: dashed;
+                border-color: darkblue;
+                border-width: 10px;
+                text-shadow: 2px 2px 4px rgba(1, 1, 0, 0.5); /* Shadow for h1 */
+            }
+
+            span.studentNumber,
+            span.subjectCode {
+                font-family: Courier New;
+                font-size: 50px;
+            }
+
+            h1:hover {
+                background-color: rgb(142, 128, 236);
+                border-color: rgb(177, 1, 1);
+                border-style: dotted;
+                border-width: 15px;
+                cursor: pointer;
+                color: rgb(177, 1, 1);
+                text-shadow: 2px 2px 4px rgba(239, 235, 240, 0.973); /* Shadow for h1 on hover */
+
+            }.h1-container {
+                position: relative;
+                width: 100%; /* Adjust container width as needed */
+                margin: 0 auto; /* Center the container */
+            }
+
+        /* Heading 2: Subject Code and subject title */
+            .h2-background {
+                position: relative;
+                display: inline-block;
+                width: 100%; 
+            }
+
+            .h2-image {
+                width: 100%;
+                height: auto;
+            }
+
+            .h2-textbox {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px; /* Adjust padding as needed */
+                color: white; /* Text color */
+                text-shadow: 2px 2px 4px rgba(1, 1, 0, 0.5);
+                font-size: 30px;
+            }
+            .h2-background p {
+                text-align: left; /* Align text to the left */
+                margin-top: 10px; /* Adjust spacing between image and text */
+            }
+
+            .textbox h2 {
+                margin: 0; 
+            }
+
+        /* Heading 3: Assignment number and due date */
+            .h3-textbox {
+            position: relative;
+            display: inline-block; /* Ensure the container wraps around the text and image */
+            }
+
+            .h3-text {
+                /* Styling for the text */
+                cursor: pointer; 
+                font-size: 40px;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            .h3-text:hover {
+            color: red; /* Change text color to red when hovered */ 
+            }
+
+            .h3-text:hover .underline {
+            text-decoration: underline; /* Underline the span when text is hovered */
+            }
+
+            .h3-image {
+                position: absolute;
+                max-width: 100px;
+                top: 0;
+                left: 100%; /* Position the image to the right of the text */
+                visibility: hidden; /* Hide the image by default */
+                padding: 20px;
+            }
+
+            .h3-text:hover + .h3-image {
+                visibility: visible; /* Show the image when the text is hovered over */
+            }
+
+    /* Task 2: Use CSS to style a table */
+        tr.T2heading th {
+            color: darkred;
+            font-size: x-large;
+            background-color: rgba(255, 225, 0, 0.664); 
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+        tr.T2heading th:first-child {
+            border-right: 4px double rgb(86, 33, 199);
+            }
+
+        /* Style for alternate rows */
+        .tableT2 tr:nth-child(even) {
+            background-color: #b7eaf7e5; /* Lighter alternate background color */
+            color: #036323;
+            }
+
+        .tableT2 td:not(:last-child) {
+            border-right: 4px double rgb(86, 33, 199);
+            }
+
+        /* Style for specific alternate rows */
+        tr.T2alternate {
+            background-color: #cfe8cc; /* Light blue background for specific alternate rows */
+            color: #2405bcfe;
+            }
+
+        /* Style for table borders */
+        .tableT2 {
+            border-collapse: collapse;
+            border-width: 10px;
+            border: 5px outset rgb(86, 33, 199);
+            width: 100%;
+            }
+
+        .tableT2 td:left{
+            border-right: 4px double rgb(107, 54, 222); /* Add double right border to data cells */
+            }
+
+        .tableT2 th, .tableT2 td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 3px dashed #2515b7; /* Add border bottom to separate rows */
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+
+    /* Task 3: HTML & CSS */    
+        tr.T3heading th {
+            color:rgba(255, 225, 0, 0.96); 
+            text-align: center;
+            font-size: x-large;
+            background-color:  rgb(220, 54, 54);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-shadow: 1px 1px 2px #a49fc3;
+            text-transform: uppercase;
+            }
+
+        tr.T3heading th:first-child {
+            border-right: 3px outset rgb(25, 113, 220);
+            }
+
+        .tableT3 td:nth-child(2) {
+            padding-top: 50px;
+            padding-right: 30px;
+            padding-bottom: 30px;
+            padding-left: 20px;
+            }
+
+        .tableT3 td:nth-child(1) {
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px; /* Add padding to the left side */
+            }
+
+        /* Style for alternate rows */
+        .tableT3 tr:nth-child(even) {
+            background-color: #fdd1b8da; /* Lighter alternate background color */
+            color: #250e70f3;
+            font-size: large;
+            vertical-align: top;
+            }
+
+        .tableT3 td:not(:last-child) {
+            border-right: 3px outset rgb(25, 113, 220);
+            }
+
+
+        /* Style for specific alternate rows */
+        tr.T3alternate {
+            background-color: #e1c3e6; /* Light blue background for specific alternate rows */
+            color: #72052f;
+            font-size: large;
+            vertical-align: top;
+            }
+
+        /* Style for table borders */
+        .tableT3 {
+            border-collapse: collapse;
+            border-width: 10px;
+            border: 5px dotted rgb(30, 181, 195);
+            width: 100%;
+            }
+
+        .tableT3 th, .tableT3 td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 3px outset rgb(51, 25, 220); /* Add border bottom to separate rows */
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif   
+        }
+
+        .T3Source {
+            color: rgb(255, 0, 13);
+            font-size: small;
+            }
+        .T3Source a {
+            color: rgb(255, 0, 13);
+            font-size: small;
+            }
+
+    /* Task 4: Javascript with Button */   
+        .clicked {
+            background-color: rgba(89, 204, 217, 0.656);
+        }
+
+        #animalImageSource {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .imageSource {
+            font-size: 12px;
+            color: #666;
+            display: none;                  /* Hide by default */
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Task 1: Use CSS to display the following Information -->
+        <p class=taskName><span>Task 1:</span><i> Use CSS to Display the following Information</i></p>
+    
+    <!-- Heading 1: Student number and full name -->
+        <div class="h1-container">
+            <h1><span class="studentNumber">8457487</span><br><b>Claire Linnane</b></h1>
+        </div>
+
+    <!-- Heading 2: Subject Code and subject title -->
+        <div class="h2-background">
+            <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3/webSecurity_background2.png" class="h2-image">
+            <div class="h2-textbox">
+                <h2><span class="subjectCode">COMP804:</span> Web Security</h2>
+            </div>
+            <p><a href="https://www.freepik.com/premium-vector/internet-digital-security-technology-concept-business-background-lock-circuit-board_33647441.htm#query=security%20pattern&position=9&from_view=keyword&track=ais&uuid=33febdb6-e417-4868-8ab5-ad677778d073" target="_blank"><i>image source</i></a></p>
+        </div>
+
+    <!-- Heading 3: Assignment number and due date -->
+        <div class="h3-textbox">
+            <h3 class="h3-text">Assignment 1, <i>due on the <span class="underline">4th of March 2024 </i></span> </h3>
+            <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3/calendar.jpg" class="h3-image">
+        </div>
+
+    <hr> 
+    <br>
+
+    <!-- Task 2: Use CSS to style a table -->
+    <p class=taskName><span>Task 2:</span><i> Use CSS to style a table</i></p>
+        <table class="tableT2">
+            <tr class="T2heading">
+              <th>Activity</th>
+              <th>Date</th>
+            </tr>
+            <tr>
+              <td>First day to enrol for re-enrolling (continuing) students</td>
+              <td>20 Nov 2023</td>
+            </tr>
+            <tr class="T2alternate">
+              <td>First day to enrol for new students (commencing students)</td>
+              <td>04 Dec 2023</td>
+            </tr>
+            <tr>
+              <td>Orientation</td>
+              <td>19 Feb - 22 Feb 2024
+                Further information is available on <a href="https://www.uow.edu.au/student/get-started/orientation/" target="_blank"><i>Get Started</i></a></td>
+            </tr>
+            <tr class="T2alternate">
+              <td>Lectures Commence (weeks 1-7)</td>
+              <td>26 Feb - 12 Apr 2024</td>
+            </tr>
+            <tr>
+              <td>Last day to enrol / add subjects yourself</td>
+              <td>08 Mar 2024</td>
+            </tr>
+            <tr class="T2alternate">
+              <td>Last day to enrol / add subjects with Head of Students approval</td>
+              <td>15 Mar 2024</td>
+            </tr>
+            <tr>
+              <td><b>CENSUS DATE</b>
+                <br>
+                <ul>
+                  <li>Fees due</li>
+                  <li>Last day to withdraw from subject/s without paying for them</li>
+                  <li>Last day to change HECS / FEE HELP billing option</li>
+                </ul>
+                <a href="https://uowedu.service-now.com/kb?id=kb_article_view&sysparm_article=KB0012659" target="_blank"><i>Learn more about Census date</i></a>
+                </td>
+              <td>31 Mar 2024</td>
+            </tr>
+            <tr class="T2alternate">
+              <td>Student Services and Amenities Fees Due</td>
+              <td>01 Apr 2024</td>
+            </tr>
+          </table>
+    <br>
+    <br>
+    <hr> 
+    <br>
+
+    <!-- Task 3: HTML & CSS -->
+        <p class=taskName><span>Task 3:</span><i> HTML & CSS</i></p>
+        <table class="tableT3">
+            <tr class="T3heading">
+            <th>Name
+            </th>
+            <th>Web Attack</th>
+            </tr>
+            <tr>
+            <!-- Name1 -->
+            <td><b>SQL Injection</b>
+                <br>
+                <br>
+                <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\SQLInjection.png" alt="SQL Injection" width="300">
+                <br>
+                <br>
+                <br><br><br><br><br>
+                <span class="T3Source"> Source: 
+                    <a href="https://www.linkedin.com/pulse/understanding-sql-injection-software-qa-engineers-mejbaur-bahar-fagun/" target="_blank">
+                        <i>https://www.linkedin.com/pulse/understanding-sql-injection-software-qa-engineers-mejbaur-bahar-fagun/</i>
+                    </a>
+                </span>
+            </td>
+            <!-- Attack1 -->
+            <td>Often abbreviated as SQLi, this form of cyber-attack works by inserting malicious code into the query's input form thereby enabling the hacker to gain access of the database and its contents. 
+                SQL injections commonly target the WHERE clause of a SELECT query, however they can also occur in:
+                <ul>  
+                    <li>UPDATE statements or the WHERE clause</li>
+                    <li>INSERT statements</li>
+                    <li>SELECT statements, within the table or column name or within the ORDER BY clause</li>
+                </ul>  
+                SQLi attacks typically fall into 1 of 3 categories: In-band SQLi, the most common type of attack, Inferential SQLi otherwise known as blind SQLi, and Out-of-Band SQLi, the least common type of attack.
+                In-band SQLi describes when attackers inject malicious code directly into the application's communication channel, allowing them to retrieve data through the same pathway. 
+                Inferential SQLi involves deducing information indirectly from the application's responses without directly communicating with the database. 
+                Lastly, out-of-Band SQLi utilises alternative communication channels like HTTP requests to extract data from the database, providing attackers with different avenues to exploit vulnerabilities.
+                SQL injection can be prevented by using parameterised queries or prepared statements to separate SQL code from user input, thus preventing malicious injection attacks.
+                <br>
+                <br>
+                <span class="T3Source"> Source: 
+                    <a href="https://www.crowdstrike.com/cybersecurity-101/sql-injection/" target="_blank">
+                        <i>https://www.crowdstrike.com/cybersecurity-101/sql-injection/</i>
+                    </a>
+                    <b>|</b> 
+                    <a href="https://portswigger.net/web-security/sql-injection " target="_blank">
+                        <i>https://portswigger.net/web-security/sql-injection</i>
+                    </a>
+                </span>
+                </td>
+            </tr>
+
+            <!-- Name2 -->       
+            <tr class="T3alternate">
+            <td><b>Cross-Site Scripting (XSS)</b>
+                <br>
+                <br>
+                <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\XXS.png" alt="Cross Site Scripting" width="300">
+                <br>
+                <br>
+                <br>
+                <span class="T3Source"> Source: 
+                    <a href="https://medium.com/@suhaslingam/all-about-cross-site-scripting-xss-part-1-reflected-xss-c70d77fabf99" target="_blank">
+                        <i>https://medium.com/@suhaslingam/all-about-cross-site-scripting-xss-part-1-reflected-xss-c70d77fabf99</i>
+                    </a>
+                </span>
+            </td>
+            <!-- Attack2 -->
+            <td>
+                Cross-site scripting/ XSS attacks occur when a user visits a web page or application containing malicious code. 
+                An XSS attack begins with the attackers identifying a vulnerability in a web application like a search box or a comment form that is not properly validated. 
+                The attacker then injects a malicious script into the vulnerable input field and when the user interacts with the contaminated content the malicious script executes proceeding to compromise the user’s browser or even PC.
+                XSS attacks come in 3 forms: stored XSS, reflected XSS and Document Object Model (DOM)-based XSS. 
+                Malicious script that has been injected into a website and executes when accessed by other users is stored XSS while injected script that is reflected off a web server and executed in the user's browser is Reflected XSS.
+                Lastly, DOM-nased XSS exploits weaknesses within the Document Object Model (DOM) of a webpage to run harmful scripts in the user's browser.
+                XXS attacks can be prevented by properly thoroughly validating user input, and employing strategies like the Content Security Policy (CSP) to restrict the execution of untrusted scripts.
+                <br>
+            <br>
+            <br>
+            <span class="T3Source"> Source: 
+                <a href="https://www.cloudflare.com/learning/security/threats/cross-site-scripting/ " target="_blank">
+                    <i>https://www.cloudflare.com/learning/security/threats/cross-site-scripting/</i>
+                </a> 
+                <b>|</b> 
+                <a href="https://chat.openai.com/c/9604c479-d710-4deb-9d6c-92345fd347cb" target="_blank">
+                    <i>https://chat.openai.com/c/9604c479-d710-4deb-9d6c-92345fd347cb</i>
+                </a>
+                </span>
+                </td>
+            </tr>
+
+            <!-- Name3 --> 
+            <tr class="T3alternate">   
+                <td><b>Cross-Site Request Forgery (CSRF)</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\CSRF.png" alt="Cross-Site Request Forgery" width="300">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://securitysouls.com/a-tale-of-cross-site-request-forgery-csrf/" target="_blank">
+                            <i>https://securitysouls.com/a-tale-of-cross-site-request-forgery-csrf/</i>
+                        </a>
+                    </span>
+                </td>
+            <!-- Attack3 -->
+                <td>
+                    The key aspect of this attack is forgery: CSRF operates by forging a request on behalf of the victim, deceiving the browser into sending an unauthorized request by an authenticated user to a web application. 
+                    A successful CSRF attack relies on three conditions being met: a relevant action to induce, an application that relies solely on session cookies for user identification in HTTP requests, and no unpredictable request parameters. 
+                    That being said, there are several anti-CSRF measures that can be deployed by both the target website and of the victim's browser such as CSRF tokens (unique and random values generated by the server-side application), SameSite cookies (browser-based restriction of cookies in cross-site requests), and Referer-based validation (verification of request origin from the application's domain).                
+                    CSRF can be prevented through the use of anti-CSRF tokens, unique tokens generated for each user session and included in requests to validate the origin of the request and prevent unauthorised actions.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://www.synopsys.com/glossary/what-is-csrf.html#:~:text=Definition,has%20in%20an%20authenticated%20user" target="_blank">
+                            <i>https://www.synopsys.com/glossary/what-is-csrf.html#:~:text=Definition,has%20in%20an%20authenticated%20user</i>
+                        </a> 
+                        <b>|</b> 
+                        <a href="https://portswigger.net/web-security/csrf" target="_blank">
+                            <i>https://portswigger.net/web-security/csrf</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            
+            <!-- Name4 -->       
+            <tr class="T3alternate">
+                <td><b>Distributed Denial of Service (DDoS)</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\DDoS.png" alt="Distributed Denial of Service" width="300">
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://bunny.net/academy/security/what-are-distributed-denial-of-service-ddos-attacks/" target="_blank">
+                            <i>https://bunny.net/academy/security/what-are-distributed-denial-of-service-ddos-attacks/</i>
+                        </a>
+                    </span>
+                </td>
+            <!-- Attack4 -->
+                <td>
+                    DDoS attacks capitalise on the capacity limits of a website by harnessing the collective power of multiple online devices, forming a botnet, and inundating the target website with artificial traffic, thus preventing legitimate users from accessing the website or server. 
+                    There are several types of DDoS attacks and they identified by the extent to which they impact the network.
+                    Volumetric Attacks strives to control as much of the user and internet’s bandwidth as possible, while protocol attacks aim to consume all available capacity of web servers or other resources, such as firewalls. 
+                    Lastly, application-layer attacks act to overwhelm the target's resources. 
+                    This type of cyber-attack is frequently employed by hacktivists or extortionists to disrupt services or coerce targets into meeting their demands.                
+                    The prevalence of DDoS attacks can be reduced through the implementation of network traffic filtering, rate limiting, and deploying DDoS protection services 
+                    that would help prophylactically identify and block malicious traffic before it overwhelms the system.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://www.imperva.com/learn/ddos/denial-of-service/" target="_blank">
+                            <i>https://www.imperva.com/learn/ddos/denial-of-service/</i>
+                        </a> 
+                        <b>|</b> 
+                        <a href="https://www.fortinet.com/resources/cyberglossary/ddos-attack" target="_blank">
+                            <i>https://www.fortinet.com/resources/cyberglossary/ddos-attack</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+            <!-- Name5 --> 
+            <tr class="T3alternate">
+                <td><b>Man-in-the-Middle (MitM)</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\MitM.png" alt="Man-in-the-Middle" width="300">
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://bunny.net/academy/security/what-is-man-in-the-middle-mitm-attack/" target="_blank">
+                            <i>https://bunny.net/academy/security/what-is-man-in-the-middle-mitm-attack/</i>
+                        </a>
+                    </span>
+                </td>
+            <!-- Attack5 -->
+                <td>
+                    An MitM attack, also known as an on-path attack, is used to describe when an attacker intercepts a channel of communication between two users thereby enabling the monitoring or altering of the transmitted data as well as the opportunity to impersonate either participant. 
+                    An MitM attack has two phases: interception and decryption. 
+                    First the attacker intercepts the transmission before it has connected to its destination. 
+                    A common point of interception is through a free public WiFi hotspot which the user connects to, unsuspectingly also giving the attacker access to their future data exchange. 
+                    Next the attacker must decrypt any two-way SSL traffic: a common way of doing this without alerting the user is via HTTPS spoofing a tactic where the user is redirected to a fake domain closely impersonating the real target website.  
+                    MitM attacks can be prevented through the use of encryption protocols such as HTTPS, using secure communication channels, and performing regular software updates.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank">
+                            <i>https://en.wikipedia.org/wiki/Man-in-the-middle_attack </i>
+                        </a> 
+                        <b>|</b> 
+                        <a href="https://www.imperva.com/learn/application-security/man-in-the-middle-attack-mitm/" target="_blank">
+                            <i>https://www.imperva.com/learn/application-security/man-in-the-middle-attack-mitm/ </i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+            <!-- Name6 --> 
+            <tr class="T3alternate">
+                <td><b>Phishing</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\Phishing.jpg" alt="Phishing" width="300">
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://www.inside.unsw.edu.au/campus-life/cyber-savvy-staff-can-protect-against-phishing-threats" target="_blank">
+                            <i>https://www.inside.unsw.edu.au/campus-life/cyber-savvy-staff-can-protect-against-phishing-threats</i>
+                        </a>
+                    </span>
+                </td>
+            <!-- Attack6 -->
+                <td>
+                    Often in the form of an email, phone call or text-message phishing describes a form of fraudulent communication in which an attacker poses as a legitimate person or organisation to lure individuals into providing sensitive data such as banking details, forms of identification or other personal information. 
+                    The most common and successful form of this type of cyber-attack is spear-phishing: emails or text messages that target the recipient specifically usually by their name. With the advancement of AI, attackers can send fraudulent phone calls or voice messages to trick victims into providing sensitive information, a technique known as voice phishing. 
+                    The common characteristics of phishing messages include a sense of urgency, hyperlinks and attachments, are from an unexpected source, and offer improbably good deals.
+                    Phishing attacks can be prevented through user education and awareness, installing spam detection systems, and utilising multi-factor authentication to verify the identity of users.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://www.cyber.gov.au/learn-basics/explore-basics/watch-out-threats/phishing-emails-and-texts" target="_blank">
+                            <i>https://www.cyber.gov.au/learn-basics/explore-basics/watch-out-threats/phishing-emails-and-texts</i>
+                        </a> 
+                        <b>|</b> 
+                        <a href="https://www.phishing.org/what-is-phishing" target="_blank"><i>https://www.phishing.org/what-is-phishing</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+            <!-- Name7 --> 
+            <tr class="T3alternate">
+                <td><b>Clickjacking</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\Clickjacking.png" alt="Clickjacking" width="300">
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://en.wikipedia.org/wiki/Clickjacking" target="_blank">
+                            <i>https://en.wikipedia.org/wiki/Clickjacking</i></a>
+                    </span>
+                </td>
+            <!-- Attack7 -->
+                <td>
+                    Clickjacking otherwise known as a User Interface (UI) redress attack, is when a user is tricked into unknowingly clicking a malicious element on a webpage often hidden by multiple transparent layers. 
+                    Once the hidden UI has been clicked malware could be downloaded and malicious web pages be presented requesting sensitive information. 
+                    Clickjacking attacks come in several different forms including Drag and Drop whereby the attacker captures inputted information from the fill-out fields of a web form. 
+                    Another type of clickjacking is filejacking whereby the attacker can gain access to the user’s files through the “choose folder” dialog box when downloading a file.
+                    Clickjacking can be prevented through the use of frame-busting scripts, utilising X-Frame-Options HTTP headers to restrict framing, 
+                    and ensuring proper validation of user input to prevent unauthorised interactions with obscured elements.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source:
+                        <a href="https://resources.infosecinstitute.com/topics/hacking/bypassing-same-origin-policy-part-3-clickjacking-cursorjacking-filejacking/" target="_blank">
+                            <i>https://resources.infosecinstitute.com/topics/hacking/bypassing-same-origin-policy-part-3-clickjacking-cursorjacking-filejacking/</i>
+                        </a>
+                        <b>|</b>
+                        <a href="https://www.fortinet.com/resources/cyberglossary/clickjacking" target="_blank">
+                            <i>https://www.fortinet.com/resources/cyberglossary/clickjacking</i>
+                        </a>
+                        <b>|</b>
+                        <a href="https://solidwp.com/blog/what-is-clickjacking-and-how-to-prevent-it/" target="_blank">
+                            <i>https://solidwp.com/blog/what-is-clickjacking-and-how-to-prevent-it/</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+            <!-- Name8 --> 
+            <tr class="T3alternate">
+                <td><b>File Inclusion Attacks</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\FileInclusionAttack.png" alt="File Inclusion Attack" width="300">
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://knowledge-base.secureflag.com/vulnerabilities/inadequate_input_validation/file_inclusion_vulnerability.html" target="_blank">
+                            <i>https://knowledge-base.secureflag.com/vulnerabilities/inadequate_input_validation/file_inclusion_vulnerability.html</i></a>
+                    </span>
+                </td>
+            <!-- Attack8 -->
+                <td>
+                    File Inclusion attacks predominately target web applications that rely on a scripting run time: a guide for how the mechanics of an application should work such as how the memory is accessed and the appropriate syntax.
+                    This type of cyberattack comes in two main forms: remote-, and local-file inclusion. 
+                    Local file inclusion occurs when the attacker manipulates input parameters forcing the web application to execute files residing on the same server where it can run malicious code or expose sensitive information. 
+                    Conversely, Remote File Inclusion (RFI) attacks occur attackers include and execute files hosted on a remote server controlled by the attacker, subsequently exposing the system to unauthorised access or the execution of malicious code.
+                    File Inclusion Attacks can be prevented by not incorporating user input directly into file inclusion operations, validating input and encoding output thoroughly, and
+                    restricting file access permissions thus preventing the unauthorised inclusion of sensitive files.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source:
+                        <a href="https://cybershadow.medium.com/file-inclusion-attack-explained-690571c9baf4 " target="_blank">
+                            <i>https://cybershadow.medium.com/file-inclusion-attack-explained-690571c9baf4 </i>
+                        </a>
+                        <b>|</b>
+                        <a href="https://en.wikipedia.org/wiki/File_inclusion_vulnerability " target="_blank">
+                            <i>https://en.wikipedia.org/wiki/File_inclusion_vulnerability</i>
+                        </a>
+                        <b>|</b>
+                        <a href="https://developers.google.com/apps-script/guides/v8-runtime#:~:text=In%20Apps%20Script%20and%20JavaScript,what%20program%20syntax%20is%20legal" target="_blank">
+                            <i>https://developers.google.com/apps-script/guides/v8-runtime#:~:text=In%20Apps%20Script%20and%20JavaScript,what%20program%20syntax%20is%20legal</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+            <!-- Name9 --> 
+            <tr class="T3alternate">
+                <td><b>Server-Side Request Forgery (SSRF)</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\SSRF.png" alt="Server-Side Request Forgery" width="300">
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://www.geeksforgeeks.org/server-side-request-forgery-ssrf-in-depth/" target="_blank">
+                            <i>https://www.geeksforgeeks.org/server-side-request-forgery-ssrf-in-depth/</i></a>
+                    </span>
+                </td>
+            <!-- Attack9 -->
+                <td>
+                    Server-Side Request Forgery (SSRF) is a tactic employed by attackers to manipulates a web application's server-side functions enabling them access or modify data as well as the ability to make unauthorised requests to an unintended location. 
+                    SSRF attacks can categorised into 3 types according to how the server responds to the initial request. 
+                    The first is a blind SSRF: this is where the attacker manipulates the server to make a request on behalf of the user without receiving immediate feedback about the outcomes of those requests. 
+                    The next type is Semi-Blind SSRF and like the Blind SSRF, the attacker also does not receive direct feedback from the server about the outcome of the requests, however through a series of subtle indicators such as differences in response times or the presence of error messages, the attackers can indirectly infer the results. 
+                    Lastly, there is Non-Blind SSRF where the attacker can immediately observe the effects of their malicious attacks without any limitations.
+                    SSRF can be avoided by validating the user's input, implementing a library of allowed URL patterns,
+                    and restricting access to sensitive internal resources thus reducing the risk of unauthorised requests being made by the server.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source:
+                        <a href="https://www.feroot.com/education-center/what-is-server-side-request-forgery-ssrf/" target="_blank">
+                            <i>https://www.feroot.com/education-center/what-is-server-side-request-forgery-ssrf/</i>
+                        </a>
+                        <b>|</b>
+                        <a href="https://chat.openai.com/c/0da3fcc3-9b32-4fe2-bb97-e527775ecdab" target="_blank">
+                            <i>https://chat.openai.com/c/0da3fcc3-9b32-4fe2-bb97-e527775ecdab</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+            <!-- Name10 --> 
+            <tr class="T3alternate">
+                <td><b>XML External Entity (XXE) Injection</b>
+                    <br>
+                    <br>
+                    <img src="C:\Users\clair\OneDrive\Desktop\uni\web security\visual studio content\ClaireLinnane_8457487_A3\task3\XML.png" alt="XML External Entity Injection" width="300">
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source: 
+                        <a href="https://www.acunetix.com/blog/articles/xml-external-entity-xxe-vulnerabilities/" target="_blank">
+                            <i>https://www.acunetix.com/blog/articles/xml-external-entity-xxe-vulnerabilities/</i></a>
+                    </span>
+                </td>
+            <!-- Attack10 -->
+                <td>
+                    XML External Entity Injection often abbreviated to XXE Injection, describes when an attacker interferes with an application's processing of XML data. 
+                    An XXE Injection is so nefarious as not only does it enable the attacker to view files on the application server, 
+                    but it can also interact with any back end or external systems the application connects and by way of an SSRF attack, compromise the server or other back-end infrastructure. 
+                    Vulnerabilities that can lead to XXE attacks include a lack of input validation, insecure XML processing libraries and poorly configured systems. 
+                    There are several different types of XXE injection including: Basic where the attacker inserts a malicious external entity declaration directly into the XML document; 
+                    Parameter XXE Injection where the harmful code is inserted into the XML document's reusable components; and 
+                    Entity Expansion XXE Injection where the attacker overwhelms the system with a large number of nested entity references essentially conquering by way of a denial-of-service (DoS) attack.
+                    The risk of XXE injection can be reduced by disabling external entity processing and using 
+                    secure XML libraries that do not expand external entities by default.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="T3Source"> Source:
+                        <a href="https://portswigger.net/web-security/xxe" target="_blank">
+                            <i>https://portswigger.net/web-security/xxe</i>
+                        </a>
+                        <b>|</b>
+                        <a href="https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing" target="_blank">
+                            <i>https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing</i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <br>
+        <hr> 
+        <br>
+
+    <!-- Task 4: Javascript with Button   -->
+    <p class=taskName><span>Task 4:</span><i> Javascript with Button</i></p>
+    <br>
+    <button id="wombatButton" onclick="handleButtonClick('wombatButton')">Wombat</button>
+    <button id="echidnaButton" onclick="handleButtonClick('echidnaButton')">Echidna</button>
+    <button id="pelicanButton" onclick="handleButtonClick('pelicanButton')">Pelican</button>
+    <br>
+    <br>
+    <input type="text" id="textBox" readonly style="display: block; margin-top: 10px;">
+    <br>
+    <p id="displayText"></p>
+    <div>
+        <img src="" alt="Animal Image" id="animalImageSource" style="display: none;">
+        <p id="wombatImageSource" class="imageSource"></p>
+        <a id="wombatImageSourceLink" href="#" class="imageSource" target="_blank"></a>
+    </div>
+    <div>
+        <img src="" alt="Animal Image" id="animalImageSource" style="display: none;">
+        <p id="echidnaImageSource" class="imageSource"></p>
+        <a id="echidnaImageSourceLink" href="#" class="imageSource" target="_blank"></a>
+    </div>
+    <div>
+        <img src="" alt="Animal Image" id="animalImageSource" style="display: none;">
+        <p id="pelicanImageSource" class="imageSource"></p>
+        <a id="pelicanImageSourceLink" href="#" class="imageSource" target="_blank"></a>
+        <br>
+        <br>
+        <br>
+    </div>
+</body>
+</html>
